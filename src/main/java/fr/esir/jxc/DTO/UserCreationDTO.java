@@ -1,6 +1,6 @@
-package fr.esir.jxc.models.DTO;
+package fr.esir.jxc.DTO;
 
-import fr.esir.jxc.models.Address;
+import com.jxc.dbmanager.models.Address;
 import lombok.Value;
 
 @Value
