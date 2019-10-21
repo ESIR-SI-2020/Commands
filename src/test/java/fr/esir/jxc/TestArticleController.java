@@ -1,8 +1,11 @@
 package fr.esir.jxc;
 
+import fr.esir.jxc.DTO.ArticleCreationDTO;
 import fr.esir.jxc.DTO.ModifyPasswordRequest;
+import fr.esir.jxc.controllers.impl.ArticleControllerImpl;
 import fr.esir.jxc.controllers.impl.UserControllerImpl;
 import fr.esir.jxc.exceptions.ResourceException;
+import fr.esir.jxc.services.ArticleService;
 import fr.esir.jxc.services.UserService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,26 +21,26 @@ import org.springframework.http.ResponseEntity;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TestUserController {
+public class TestArticleController {
     @InjectMocks
-    private UserControllerImpl userController;
+    private ArticleControllerImpl articleController;
 
     @Mock
-    private UserService userService;
+    private ArticleService articleService;
 
     @BeforeAll
     public void setup() {
-        Mockito.doNothing().when(userService).sendModifiedPasswordEvent(isA(String.class), isA(String.class));
+        Mockito.doNothing().when(articleService).sendCreateArticleEvent(isA(ArticleCreationDTO.class));
     }
 
     @Test
-    public void modifyPassword_ShouldReturnOK_OK() {
-        ResponseEntity response = userController.modifyPassword("test@gmail.com", new ModifyPasswordRequest("oldpassword", "Newpassword01&"));
+    public void createArticle_ShouldReturnOK_OK() {
+        ResponseEntity response = articleController.createArticle(new ArticleCreationDTO("test@orange.fr", "/uid"));
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
     }
 
     @Test(expected = ResourceException.class)
-    public void modifyPassword_WithBadEmail_ShouldReturnNOK_400() {
-        ResponseEntity response = userController.modifyPassword("testgmail.com", new ModifyPasswordRequest("oldpassword", "Newpassword01&"));
+    public void createArticle_WithBadEmail_ShouldReturnNOK_400() {
+        ResponseEntity response = articleController.createArticle(new ArticleCreationDTO("t.fr", "/uid"));
     }
 }

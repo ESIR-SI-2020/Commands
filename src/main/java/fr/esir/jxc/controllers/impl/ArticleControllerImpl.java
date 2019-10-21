@@ -20,7 +20,7 @@ public class ArticleControllerImpl implements ArticleController {
         if(userEmail == null || articleUrl == null) {
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : Given user email or article URL are empty.");
         }
-        if (Patterns.EMAIL_PATTERN.matcher(userEmail).matches()){
+        if (!Patterns.EMAIL_PATTERN.matcher(userEmail).matches()){
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : The given email is in the wrong format)");
         }
 
