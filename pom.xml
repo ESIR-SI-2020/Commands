@@ -73,6 +73,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.jxc</groupId>
+            <artifactId>eventstoremanager</artifactId>
+            <version>0.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

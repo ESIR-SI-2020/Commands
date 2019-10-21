@@ -1,6 +1,7 @@
 package fr.esir.jxc.services;
 
-import fr.esir.jxc.config.KafkaProducerConfig;
+import com.jxc.eventstoremanager.config.KafkaTopicConfig;
+import com.jxc.eventstoremanager.models.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -12,17 +13,17 @@ import org.springframework.util.concurrent.SettableListenableFuture;
 @Service
 public class KafkaProducer {
     @Autowired
-    private final KafkaProducerConfig kafkaProducerConfig;
+    private final KafkaTopicConfig kafkaTopicConfig;
     @Autowired
     private final KafkaTemplate<String, Event> kafkaTemplate;
 
-    public KafkaProducer(KafkaTemplate<String, Event> kafkaTemplate, KafkaProducerConfig kafkaProducerConfig) {
+    public KafkaProducer(KafkaTemplate<String, Event> kafkaTemplate, KafkaTopicConfig kafkaTopicConfig) {
         this.kafkaTemplate = kafkaTemplate;
-        this.kafkaProducerConfig = kafkaProducerConfig;
+        this.kafkaTopicConfig = kafkaTopicConfig;
     }
 
     public ListenableFuture<SendResult<String, Event>> produce(Event event) {
-        return this.kafkaTemplate.send(this.kafkaProducerConfig.TOPIC, event);
+        return this.kafkaTemplate.send(this.kafkaTopicConfig.TOPIC, event);
     }
 
     public ListenableFuture<SendResult<String, Event>> produceObject(Object event) {
