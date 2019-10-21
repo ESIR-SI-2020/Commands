@@ -1,4 +1,4 @@
-package user.json;
+package fr.esir.jxc.DTO;
 
 public class ModifyPasswordRequest {
     private String oldPassword;
