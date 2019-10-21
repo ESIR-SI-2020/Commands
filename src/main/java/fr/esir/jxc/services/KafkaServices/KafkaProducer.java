@@ -1,4 +1,4 @@
-package fr.esir.jxc.services;
+package fr.esir.jxc.services.KafkaServices;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,14 +8,9 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.SettableListenableFuture;
-import user.config.KafkaProducerConfig;
-import user.config.KafkaTopicConfig;
-import user.models.Event;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import fr.esir.jxc.config.KafkaProducerConfig;
+import fr.esir.jxc.config.KafkaTopicConfig;
+import fr.esir.jxc.models.Event;
 
 @Service
 public class KafkaProducer {
