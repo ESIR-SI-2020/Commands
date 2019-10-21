@@ -35,7 +35,7 @@ public class UserControllerImpl implements UserController {
 
         userService.sendModifiedPasswordEvent(userId, newPassword);
 
-        return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @Override

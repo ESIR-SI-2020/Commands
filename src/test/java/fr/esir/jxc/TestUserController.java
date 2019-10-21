@@ -31,13 +31,13 @@ public class TestUserController {
     }
 
     @Test
-    public void modifyPassword_ShouldReturnOK_OK() {
+    public void modifyPassword_OK() {
         ResponseEntity response = userController.modifyPassword("test@gmail.com", new ModifyPasswordRequest("oldpassword", "Newpassword01&"));
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
     }
 
     @Test(expected = ResourceException.class)
-    public void modifyPassword_WithBadEmail_ShouldReturnNOK_400() {
+    public void modifyPassword_WithBadEmail() {
         ResponseEntity response = userController.modifyPassword("testgmail.com", new ModifyPasswordRequest("oldpassword", "Newpassword01&"));
     }
 }
