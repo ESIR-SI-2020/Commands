@@ -11,12 +11,20 @@ import org.springframework.util.concurrent.SettableListenableFuture;
 
 @Service
 public class KafkaProducer {
+<<<<<<< HEAD
     @Autowired
     private final KafkaProducerConfig kafkaProducerConfig;
     @Autowired
     private final KafkaTemplate<String, Event> kafkaTemplate;
 
     public KafkaProducer(KafkaTemplate<String, Event> kafkaTemplate, KafkaProducerConfig kafkaProducerConfig) {
+=======
+
+    private final KafkaTopicConfig kafkaTopicConfig;
+    private final KafkaTemplate<String, Event> kafkaTemplate;
+
+    public KafkaProducer(@Autowired KafkaTemplate<String, Event> kafkaTemplate, @Autowired KafkaTopicConfig kafkaTopicConfig) {
+>>>>>>> Implemented User services and User creation controller method [COMPILING]
         this.kafkaTemplate = kafkaTemplate;
         this.kafkaProducerConfig = kafkaProducerConfig;
     }
