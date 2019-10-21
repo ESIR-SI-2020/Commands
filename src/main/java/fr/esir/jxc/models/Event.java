@@ -1,7 +1,7 @@
 package fr.esir.jxc.models;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import fr.esir.jxc.common.Json;
+import fr.esir.jxc.utils.Json;
 import lombok.Value;
 import java.util.Optional;
 
@@ -10,9 +10,6 @@ public class Event {
 
     String eventName;
     String body;
-
-    public Event(String simpleName, String writeValueAsString) {
-    }
 
     public static Optional<Event> of(Object event) {
         try {
