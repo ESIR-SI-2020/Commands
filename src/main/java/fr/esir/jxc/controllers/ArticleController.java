@@ -4,10 +4,10 @@ import com.jxc.dbmanager.models.Article;
 import com.jxc.dbmanager.models.User;
 import fr.esir.jxc.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController("api/v1/users/")
 public class ArticleController {
@@ -16,8 +16,9 @@ public class ArticleController {
 
 
     @PostMapping("{email}/articles/{articleId}/share")
-    public void shareArticle(@RequestBody PathVariable articleId, PathVariable email ){
-
+    @ResponseStatus(HttpStatus.CREATED)
+    public void shareArticle(@RequestBody List<String> targetEmail,  @PathVariable  long articleId, @PathVariable("email") String ownerEmail ){
+        //
 
     }
 }
