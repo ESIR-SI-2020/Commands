@@ -23,10 +23,10 @@ public class UserControllerImpl implements UserController {
         if (oldPassword == null || newPassword == null) {
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : Given new password or old password are empty.");
         }
-        if (Patterns.emailPattern.matcher(userId).matches()){
+        if (!Patterns.emailPattern.matcher(userId).matches()){
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : The given email is in the wrong format)");
         }
-        if (Patterns.passwordPattern.matcher(newPassword).matches()){
+        if (!Patterns.passwordPattern.matcher(newPassword).matches()){
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : Your password must have : Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character");
         }
         //TODO token authentification ?
@@ -36,6 +36,11 @@ public class UserControllerImpl implements UserController {
         userService.sendModifiedPasswordEvent(userId, newPassword);
 
         return ResponseEntity.status(HttpStatus.OK).body("Modify password request received");
+    }
+
+    @Override
+    public void createUser(String newUser) {
+
     }
 
     private void checkOldPassword(String userId, String oldPassword) {
