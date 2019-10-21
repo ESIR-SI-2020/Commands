@@ -1,5 +1,6 @@
 package fr.esir.jxc.controllers.impl;
 
+import fr.esir.jxc.DTO.ModifyPasswordRequest;
 import fr.esir.jxc.controllers.UserController;
 import fr.esir.jxc.exceptions.ResourceException;
 import fr.esir.jxc.services.UserService;
@@ -15,7 +16,7 @@ public class UserControllerImpl implements UserController {
     @Autowired
     UserService userService;
 
-    public ResponseEntity modifyPassword(String userId, user.json.ModifyPasswordRequest modifyPasswordRequest) {
+    public ResponseEntity modifyPassword(String userId, ModifyPasswordRequest modifyPasswordRequest) {
         //controle wrapper(new password)
         String oldPassword = modifyPasswordRequest.getOldPassword();
         String newPassword = modifyPasswordRequest.getNewPassword();

@@ -1,5 +1,6 @@
 package fr.esir.jxc;
 
+import fr.esir.jxc.DTO.ModifyPasswordRequest;
 import fr.esir.jxc.controllers.impl.UserControllerImpl;
 import fr.esir.jxc.exceptions.ResourceException;
 import fr.esir.jxc.services.UserService;
@@ -31,7 +32,7 @@ public class TestUserController {
 
     @Test
     public void modifyPassword_ShouldReturnOK_OK() {
-        ResponseEntity response = userController.modifyPassword("test@gmail.com", new user.json.ModifyPasswordRequest("oldpassword", "Newpassword01&"));
+        ResponseEntity response = userController.modifyPassword("test@gmail.com", new ModifyPasswordRequest("oldpassword", "Newpassword01&"));
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
     }
 
