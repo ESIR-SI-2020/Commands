@@ -1,6 +1,6 @@
 package fr.esir.jxc.services.Impl;
 
-import fr.esir.jxc.models.ResponseCreated;
+import fr.esir.jxc.models.PasswordModified;
 import fr.esir.jxc.services.KafkaServices.KafkaProducer;
 import fr.esir.jxc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void sendModifiedPasswordEvent(String email, String newPassword){
-        ResponseCreated userCreated = ResponseCreated.of(email, newPassword);
+        PasswordModified userCreated = PasswordModified.of(email, newPassword);
         this.kafkaProducer.produceObject(userCreated);
     }
 }

@@ -1,10 +1,10 @@
 package user.json;
 
-public class ModifyPasswordWrapper {
+public class ModifyPasswordDTO {
     private String oldPassword;
     private String newPassword;
 
-    public ModifyPasswordWrapper(String oldPassword, String newPassword) {
+    public ModifyPasswordDTO(String oldPassword, String newPassword) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
     }

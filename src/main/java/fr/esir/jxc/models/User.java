@@ -8,7 +8,7 @@ public class User {
 	String email;
 	String photoUrl;
 	String bio;
-    user.models.Address address;
+    Address address;
     List<String> friendsId;
 
     public String getUsername() {
@@ -51,11 +51,11 @@ public class User {
         this.bio = bio;
     }
 
-    public user.models.Address getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(user.models.Address address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

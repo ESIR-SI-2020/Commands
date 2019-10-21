@@ -16,10 +16,10 @@ public class UserControllerImpl implements UserController {
     @Autowired
     UserService userService;
 
-    public ResponseEntity modifyPassword(String userId, user.json.ModifyPasswordWrapper modifyPasswordWrapper) {
+    public ResponseEntity modifyPassword(String userId, user.json.ModifyPasswordDTO modifyPasswordDTO) {
         //controle wrapper(new password)
-        String oldPassword = modifyPasswordWrapper.getOldPassword();
-        String newPassword = modifyPasswordWrapper.getNewPassword();
+        String oldPassword = modifyPasswordDTO.getOldPassword();
+        String newPassword = modifyPasswordDTO.getNewPassword();
         if (oldPassword == null || newPassword == null) {
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : Given new password or old password are empty.");
         }

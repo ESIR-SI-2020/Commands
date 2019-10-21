@@ -15,23 +15,6 @@ import fr.esir.jxc.models.Event;
 @Service
 public class KafkaProducer {
 
-   /* private static final Logger LOGGER =
-            LoggerFactory.getLogger(KafkaProducer.class);
-
-    @Autowired
-    private KafkaProducerConfig kafkaProducerConfig;
-
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate = kafkaProducerConfig.kafkaTemplate();
-
-    public void send(ModifiedPasswordResponse payload) throws IOException {
-        File fichier =  new File("tmp/response.ser") ;
-        ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream(fichier));
-        obj.writeObject(payload);
-        LOGGER.info("sending payload='{}'", payload);
-        kafkaTemplate.send(payload.eventName, payload);
-    }*/
-
     private final KafkaTopicConfig kafkaTopicConfig;
     private final KafkaTemplate<String, Event> kafkaTemplate;
 
