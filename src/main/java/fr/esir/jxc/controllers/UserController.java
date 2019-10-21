@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 public interface UserController {
     /**
      * @param userId
-     * @param modifyPasswordDTO the body
+     * @param modifyPasswordRequest the body
      */
     @PostMapping("/{userId}/password")
     public ResponseEntity modifyPassword(@PathVariable final String userId,
-                                         @RequestBody user.json.ModifyPasswordDTO modifyPasswordDTO);
+                                         @RequestBody user.json.ModifyPasswordRequest modifyPasswordRequest);
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

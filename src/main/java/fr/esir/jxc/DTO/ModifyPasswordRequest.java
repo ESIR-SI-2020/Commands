@@ -1,10 +1,10 @@
 package user.json;
 
-public class ModifyPasswordDTO {
+public class ModifyPasswordRequest {
     private String oldPassword;
     private String newPassword;
 
-    public ModifyPasswordDTO(String oldPassword, String newPassword) {
+    public ModifyPasswordRequest(String oldPassword, String newPassword) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
     }
