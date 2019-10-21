@@ -33,7 +33,7 @@ public class TestUserController {
     @Test
     public void modifyPassword_OK() {
         ResponseEntity response = userController.modifyPassword("test@gmail.com", new ModifyPasswordRequest("oldpassword", "Newpassword01&"));
-        Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
     }
 
     @Test(expected = ResourceException.class)
