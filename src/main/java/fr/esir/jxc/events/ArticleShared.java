@@ -1,7 +1,9 @@
 package fr.esir.jxc.events;
 
 import fr.esir.jxc.models.ArticleSharedRequest;
+import lombok.Value;
 
+@Value
 public class ArticleShared {
     String articleId;
     String ownerEmail;

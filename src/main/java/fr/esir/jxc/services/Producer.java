@@ -17,7 +17,8 @@ public class Producer {
 
     public Producer(
             @Autowired KafkaTemplate<String, Event> kafkaTemplate,
-            @Autowired KafkaTopicConfig kafkaTopicConfig) {
+            @Autowired KafkaTopicConfig kafkaTopicConfig
+    ) {
         this.kafkaTemplate = kafkaTemplate;
         this.kafkaTopicConfig = kafkaTopicConfig;
     }
