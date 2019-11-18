@@ -20,5 +20,10 @@ public class ArticleController {
     public void shareArticle(@RequestBody List<String> targetEmails,  @PathVariable  long articleId, @PathVariable("email") String ownerEmail ){
         // TODO
         //  validation
+
+        //call articleservice
+        // it calls produceObject
+        // which calls produce (with the event as parameter)
+        // it pushes the event in kafka
     }
 }
