@@ -1,7 +1,12 @@
 package fr.esir.jxc.DTO;
 
 import com.jxc.dbmanager.models.Address;
+import fr.esir.jxc.utils.CheckEmailFormat;
 import lombok.Value;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.InvalidParameterException;
 
@@ -14,8 +19,8 @@ public class UserCreationDTO {
     public Address address;
 
     public static void validateUserCreationRequest(UserCreationDTO user) {
-        if (user.getUsername() == null
-                || user.getEmail() == null
+        if (StringUtils.isNotBlank(user.getUsername() )
+                || !CheckEmailFormat.isValid(user.getEmail())
                 || user.getPassword() == null
                 || user.getPassword().length() < 8
         ) {
