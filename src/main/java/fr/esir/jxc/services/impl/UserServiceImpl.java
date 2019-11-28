@@ -1,9 +1,9 @@
 package fr.esir.jxc.services.impl;
 
-import fr.esir.jxc.event.UserDeleted;
+import fr.esir.jxc.events.UserDeleted;
 import fr.esir.jxc.models.Address;
-import fr.esir.jxc.event.PasswordModified;
-import fr.esir.jxc.event.UserModified;
+import fr.esir.jxc.events.PasswordModified;
+import fr.esir.jxc.events.UserModified;
 import fr.esir.jxc.services.KafkaServices.KafkaProducer;
 import fr.esir.jxc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

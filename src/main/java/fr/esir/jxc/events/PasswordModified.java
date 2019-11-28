@@ -1,5 +1,4 @@
-package fr.esir.jxc.event;
-import java.util.UUID;
+package fr.esir.jxc.events;
 import lombok.Value;
 
 @Value

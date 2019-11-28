@@ -1,4 +1,4 @@
-package fr.esir.jxc.event;
+package fr.esir.jxc.events;
 
 public class UserDeleted {
     String email;

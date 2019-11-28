@@ -1,8 +1,6 @@
-package fr.esir.jxc.event;
+package fr.esir.jxc.events;
 
 import fr.esir.jxc.models.Address;
-
-import java.util.UUID;
 
 public class UserModified {
     String username;

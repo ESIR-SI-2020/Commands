@@ -1,7 +1,6 @@
-package fr.esir.jxc.event;
+package fr.esir.jxc.events;
 
 import lombok.Value;
-import java.util.UUID;
 
 @Value
 public class ArticleCreated {
