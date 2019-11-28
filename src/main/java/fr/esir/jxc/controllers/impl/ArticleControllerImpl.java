@@ -24,7 +24,7 @@ public class ArticleControllerImpl implements ArticleController {
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : The given email is in the wrong format)");
         }
 
-        articleService.sendCreateArticleEvent(articleCreationDTO);
+        articleService.sendCreateArticleEvent(articleCreationDTO.getEmail(),articleCreationDTO.getUrl());
 
         return ResponseEntity.status(HttpStatus.OK).body("Create article request received");
     }

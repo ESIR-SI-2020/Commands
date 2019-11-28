@@ -1,21 +1,28 @@
 package fr.esir.jxc.controllers;
 
-import fr.esir.jxc.DTO.ModifyPasswordRequest;
+import fr.esir.jxc.DTO.ModifyPasswordDTO;
+import fr.esir.jxc.DTO.ModifyUserDTO;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController("api/v1/users")
 public interface UserController {
-    /**
-     * @param userId
-     * @param modifyPasswordRequest the body
-     */
-    @PostMapping("/{userId}/password")
-    public ResponseEntity modifyPassword(@PathVariable final String userId,
-                                         @RequestBody ModifyPasswordRequest modifyPasswordRequest);
+
+    @PostMapping("/{email}/password")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void modifyPassword(@PathVariable final String email,
+                                         @RequestBody ModifyPasswordDTO modifyPasswordDTO);
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public void createUser(@RequestBody String newUser);
+
+    @PutMapping("/{email}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void modifyUser(@PathVariable final String email,
+                                     @RequestBody ModifyUserDTO modifyUserDTO);
+
+    @DeleteMapping("/{email}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deleteUser(@PathVariable final String email);
 }

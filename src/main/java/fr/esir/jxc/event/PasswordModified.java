@@ -1,16 +1,14 @@
-package fr.esir.jxc.models;
+package fr.esir.jxc.event;
 import java.util.UUID;
 import lombok.Value;
 
 @Value
 public class PasswordModified {
 
-        String id;
         String password;
         String email;
 
-    public PasswordModified(String id, String password, String email) {
-        this.id = id;
+    public PasswordModified(String password, String email) {
         this.password = password;
         this.email = email;
     }
@@ -18,7 +16,6 @@ public class PasswordModified {
 
     public static PasswordModified of(String email, String password) {
             return new PasswordModified(
-                    UUID.randomUUID().toString(),
                     password,
                     email
             );
