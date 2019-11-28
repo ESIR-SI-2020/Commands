@@ -1,5 +1,5 @@
 kafka:
-  topic: test
+  topic: pocket-application
   bootstrapAddress: localhost:9092
   groupId: fr.esir.jxc
 
