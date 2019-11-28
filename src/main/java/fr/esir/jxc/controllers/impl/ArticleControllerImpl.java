@@ -14,7 +14,7 @@ public class ArticleControllerImpl implements ArticleController {
     private ArticleService articleService;
 
     @Override
-    public ResponseEntity createArticle(ArticleCreationDTO articleCreationDTO) {
+    public void createArticle(ArticleCreationDTO articleCreationDTO) {
         String userEmail = articleCreationDTO.getEmail();
         String articleUrl = articleCreationDTO.getUrl();
         if(userEmail == null || articleUrl == null) {
@@ -25,7 +25,14 @@ public class ArticleControllerImpl implements ArticleController {
         }
 
         articleService.sendCreateArticleEvent(articleCreationDTO.getEmail(),articleCreationDTO.getUrl());
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body("Create article request received");
+    @Override
+    public void deleteArticle(String articleId) {
+        //getArticleID ?
+        //if not exists
+        // 404
+        //else
+        articleService.sendDeletedArticleEvent(articleId);
     }
 }

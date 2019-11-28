@@ -4,4 +4,6 @@ import fr.esir.jxc.DTO.ArticleCreationDTO;
 
 public interface ArticleService {
     void sendCreateArticleEvent(String email, String url);
+
+    void sendDeletedArticleEvent(String articleId);
 }

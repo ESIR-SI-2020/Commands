@@ -1,6 +1,7 @@
 package fr.esir.jxc.services.impl;
 
 import fr.esir.jxc.events.ArticleCreated;
+import fr.esir.jxc.events.ArticleDeleted;
 import fr.esir.jxc.services.ArticleService;
 import fr.esir.jxc.services.KafkaServices.KafkaProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,15 @@ public class ArticleServiceImpl implements ArticleService {
         this.kafkaProducer = kafkaProducer;
     }
 
+    @Override
     public void sendCreateArticleEvent(String email, String url){
         ArticleCreated articleCreated = ArticleCreated.of(email, url);
         this.kafkaProducer.produceObject(articleCreated);
+    }
+
+    @Override
+    public void sendDeletedArticleEvent(String articleId) {
+        ArticleDeleted articleDeleted = ArticleDeleted.of(articleId);
+        this.kafkaProducer.produceObject(articleDeleted);
     }
 }

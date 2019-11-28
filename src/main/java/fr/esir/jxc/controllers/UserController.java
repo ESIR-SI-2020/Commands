@@ -5,7 +5,7 @@ import fr.esir.jxc.DTO.ModifyUserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("api/v1/users")
+@RestController("/api/v1/users")
 public interface UserController {
 
     @PostMapping("/{email}/password")
