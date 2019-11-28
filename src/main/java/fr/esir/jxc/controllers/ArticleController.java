@@ -1,9 +1,11 @@
 package fr.esir.jxc.controllers;
 
-import com.jxc.dbmanager.models.Article;
-import com.jxc.dbmanager.models.User;
-
+import fr.esir.jxc.models.ArticleSharedRequest;
+import fr.esir.jxc.models.User;
+import fr.esir.jxc.models.Validation;
 import fr.esir.jxc.services.ArticleService;
+import fr.esir.jxc.services.EventService;
+import fr.esir.jxc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +16,18 @@ import java.util.List;
 public class ArticleController {
 
     @Autowired ArticleService articleservice;
+    @Autowired Validation validate;
+    @Autowired UserService userService;
+    @Autowired EventService eventService;
+
 
     @PostMapping("/{email}/articles/{articleId}/share")
     @ResponseStatus(HttpStatus.CREATED)
     public void shareArticle(@RequestBody List<String> targetEmails,  @PathVariable  long articleId, @PathVariable("email") String ownerEmail ){
-        // TODO
-        //  validation
+            if (validate.verifyUser(ownerEmail) && validate.articleBelongToUser(articleId,ownerEmail) && validate.verifyArticle(articleId)){
 
-        //call articleservice
-        // it calls produceObject
-        // which calls produce (with the event as parameter)
-        // it pushes the event in kafka
+                eventService.shareArticle();
+            }
+
     }
 }
