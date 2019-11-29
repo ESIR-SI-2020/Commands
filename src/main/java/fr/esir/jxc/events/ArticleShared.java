@@ -1,26 +1,20 @@
 package fr.esir.jxc.events;
 
-import fr.esir.jxc.models.ArticleSharedRequest;
+import fr.esir.jxc.models.ShareArticleRequest;
 import lombok.Value;
+
+import java.util.List;
 
 @Value
 public class ArticleShared {
     String articleId;
     String ownerEmail;
-    String targetEmail;
-    //String username;
+    List<String> targetEmails;
 
-
-    public ArticleShared(String articleId, String ownerEmail, String targetEmail) {
-        this.articleId = articleId;
-        this.ownerEmail = ownerEmail;
-        this.targetEmail = targetEmail;
-    }
-
-    public static ArticleShared of(ArticleSharedRequest sharedarticle){
+    public static ArticleShared of(String id, String ownerEmail, ShareArticleRequest sharedArticle){
         return new ArticleShared(
-                sharedarticle.getArticleId(),
-                sharedarticle.getOwnerEmail(),
-                sharedarticle.getTargetEmail());
+                id,
+                ownerEmail,
+                sharedArticle.getTargetEmails());
     }
 }

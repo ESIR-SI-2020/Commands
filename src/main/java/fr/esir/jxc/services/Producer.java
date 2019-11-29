@@ -1,6 +1,6 @@
 package fr.esir.jxc.services;
 
-import fr.esir.jxc.config.KafkaTopicConfig;
+import fr.esir.jxc.kafka.config.KafkaTopicConfig;
 import fr.esir.jxc.events.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
