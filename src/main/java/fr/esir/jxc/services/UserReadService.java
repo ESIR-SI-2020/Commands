@@ -1,6 +1,6 @@
 package fr.esir.jxc.services;
 
-import com.jxc.dbmanager.models.User;
+import fr.esir.jxc.domain.models.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

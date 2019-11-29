@@ -1,7 +1,7 @@
 package fr.esir.jxc.DTO;
 
-import com.jxc.dbmanager.models.Address;
 import fr.esir.jxc.utils.CheckEmailFormat;
+import fr.esir.jxc.domain.models.Address;
 import lombok.Value;
 
 import org.apache.commons.lang.StringUtils;
