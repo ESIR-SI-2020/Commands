@@ -7,7 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "fr.esir.jxc.controllers")
+@ComponentScan({
+        "fr.esir.jxc.controllers",
+        "fr.esir.jxc.elasticsearch",
+        "fr.esir.jxc"
+})
 public class CommandsHandlerApplication {
     public static void main(String... args) {
         SpringApplication.run(CommandsHandlerApplication.class, args);
