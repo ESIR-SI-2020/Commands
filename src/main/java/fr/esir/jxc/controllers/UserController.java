@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.security.InvalidParameterException;
 
 
-@RestController("/users")
+@RestController
+@RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
     @Autowired
