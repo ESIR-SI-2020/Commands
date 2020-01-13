@@ -3,12 +3,13 @@ package fr.esir.jxc.controllers;
 import fr.esir.jxc.DTO.ArticleCreationDTO;
 import fr.esir.jxc.exceptions.ResourceException;
 import fr.esir.jxc.services.ArticleService;
-import fr.esir.jxc.utils.Patterns;
+import fr.esir.jxc.utils.CheckEmailFormat;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.ExecutionException;
 
 @AllArgsConstructor
 @RestController
@@ -27,11 +28,14 @@ public class ArticleController {
         if(userEmail == null || articleUrl == null) {
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : Given user email or article URL are empty.");
         }
-        if (!Patterns.EMAIL_PATTERN.matcher(userEmail).matches()){
+        if (!CheckEmailFormat.isValid(userEmail)){
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : The given email is in the wrong format)");
         }
-
-        articleService.sendCreateArticleEvent(articleCreationDTO.getEmail(),articleCreationDTO.getUrl());
+        try {
+            articleService.sendCreateArticleEvent(articleCreationDTO.getEmail(), articleCreationDTO.getUrl());
+        } catch (InterruptedException | ExecutionException e)  {
+            throw new ResourceException(HttpStatus.SERVICE_UNAVAILABLE, "Service unavailable : The event could not be sent)");
+        }
     }
     /**
      * @param articleId the id of the article
@@ -43,6 +47,10 @@ public class ArticleController {
         //if not exists
         // 404
         //else
-        articleService.sendDeletedArticleEvent(articleId);
+        try {
+            articleService.sendDeletedArticleEvent(articleId);
+        } catch (InterruptedException | ExecutionException e)  {
+            throw new ResourceException(HttpStatus.SERVICE_UNAVAILABLE, "Service unavailable : The event could not be sent)");
+        }
     }
 }
