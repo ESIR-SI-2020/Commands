@@ -1,9 +1,10 @@
 package fr.esir.jxc.events;
 import java.util.UUID;
 
+import lombok.Value;
+
 import fr.esir.jxc.DTO.UserCreationDTO;
 import fr.esir.jxc.utils.Hash;
-import lombok.Value;
 
 @Value
 public class UserCreated {
