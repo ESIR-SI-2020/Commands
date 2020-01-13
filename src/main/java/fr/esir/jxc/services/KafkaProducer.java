@@ -1,36 +1,31 @@
 package fr.esir.jxc.services;
 
-import fr.esir.jxc.config.KafkaProducerConfig;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
-
 import org.springframework.util.concurrent.SettableListenableFuture;
 
+import lombok.extern.slf4j.Slf4j;
+
+import com.jxc.eventstoremanager.config.KafkaTopicConfig;
+import com.jxc.eventstoremanager.models.Event;
+
+@Slf4j
 @Service
+@AllArgsConstructor
 public class KafkaProducer {
-<<<<<<< HEAD
     @Autowired
-    private final KafkaProducerConfig kafkaProducerConfig;
-    @Autowired
-    private final KafkaTemplate<String, Event> kafkaTemplate;
-
-    public KafkaProducer(KafkaTemplate<String, Event> kafkaTemplate, KafkaProducerConfig kafkaProducerConfig) {
-=======
-
     private final KafkaTopicConfig kafkaTopicConfig;
+    @Autowired
     private final KafkaTemplate<String, Event> kafkaTemplate;
-
-    public KafkaProducer(@Autowired KafkaTemplate<String, Event> kafkaTemplate, @Autowired KafkaTopicConfig kafkaTopicConfig) {
->>>>>>> Implemented User services and User creation controller method [COMPILING]
-        this.kafkaTemplate = kafkaTemplate;
-        this.kafkaProducerConfig = kafkaProducerConfig;
-    }
 
     public ListenableFuture<SendResult<String, Event>> produce(Event event) {
-        return this.kafkaTemplate.send(this.kafkaProducerConfig.TOPIC, event);
+        log.debug("Sending event {0} of type {1} to topic.", event.getId(), event.getType());
+
+        return this.kafkaTemplate.send(this.kafkaTopicConfig.TOPIC, event);
     }
 
     public ListenableFuture<SendResult<String, Event>> produceObject(Object event) {

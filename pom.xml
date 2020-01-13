@@ -112,6 +112,7 @@
             <groupId>fr.esir.jxc</groupId>
             <artifactId>domain</artifactId>
             <version>1.1.0</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>

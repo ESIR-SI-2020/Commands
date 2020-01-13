@@ -1,9 +1,10 @@
 package fr.esir.jxc.services;
 
-import fr.esir.jxc.domain.models.User;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import fr.esir.jxc.domain.models.User;
 
 @Service
 public class UserReadService {

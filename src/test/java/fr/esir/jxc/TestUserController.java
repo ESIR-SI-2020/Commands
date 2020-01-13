@@ -3,7 +3,6 @@ package fr.esir.jxc;
 import fr.esir.jxc.DTO.ModifyPasswordRequest;
 import fr.esir.jxc.controllers.impl.UserControllerImpl;
 import fr.esir.jxc.exceptions.ResourceException;
-import fr.esir.jxc.services.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
