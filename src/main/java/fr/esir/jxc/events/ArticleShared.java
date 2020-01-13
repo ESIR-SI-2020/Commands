@@ -1,6 +1,7 @@
 package fr.esir.jxc.events;
 
 import fr.esir.jxc.models.ShareArticleRequest;
+
 import lombok.Value;
 
 import java.util.List;

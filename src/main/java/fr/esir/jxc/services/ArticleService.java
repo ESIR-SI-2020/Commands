@@ -1,7 +1,10 @@
 package fr.esir.jxc.services;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class ArticleService {
-    public static boolean articleExists(String id) {
+    public boolean articleExists(String id) {
         return true;
     }
 }

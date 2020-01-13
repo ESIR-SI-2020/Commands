@@ -11,20 +11,25 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.InvalidParameterException;
 
-@RestController("/api/v1/users")
+@RestController
+@RequestMapping("/api/v1/users")
 public class ArticleController {
-    private final ShareArticleService shareArticleService;
 
-    public ArticleController(@Autowired ShareArticleService shareArticleService) {
-        this.shareArticleService = shareArticleService;
-    }
+    @Autowired private ShareArticleService shareArticleService;
+    @Autowired private UserService userService;
+    @Autowired private ArticleService articleService;
 
     @PostMapping("/{email}/articles/{articleId}/share")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void shareArticle(@RequestBody ShareArticleRequest targetEmails, @PathVariable  String articleId, @PathVariable(value = "email") String ownerEmail ){
         boolean validOwnerEmail = Format.validateEmail(ownerEmail);
         boolean validTargetEmails = targetEmails.getTargetEmails().stream().allMatch(Format::validateEmail);
-        if (!validOwnerEmail || !validTargetEmails || !UserService.userExists(ownerEmail) || !ArticleService.articleExists(articleId)) {
+        if (!validOwnerEmail
+            || !validTargetEmails
+            || !userService.userExists(ownerEmail)
+            || !articleService.articleExists(articleId)
+            || !userService.userOwnsArticle(ownerEmail, articleId))
+        {
             throw new InvalidParameterException();
         }
 

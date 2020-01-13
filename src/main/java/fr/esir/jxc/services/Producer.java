@@ -2,13 +2,13 @@ package fr.esir.jxc.services;
 
 import fr.esir.jxc.kafka.config.KafkaTopicConfig;
 import fr.esir.jxc.events.Event;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.SettableListenableFuture;
-
 
 @Service
 public class Producer {

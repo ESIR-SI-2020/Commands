@@ -11,11 +11,11 @@ public class Event {
     String eventName;
     String body;
 
-    public static  Optional<Event> of(Object event) {
+    public static Optional<Event> of(Object event) {
         try {
             return Optional.of(new Event(event.getClass().getSimpleName(), Json.MAPPER.writeValueAsString(event)));
         } catch (JsonProcessingException e) {
-              e.printStackTrace();
+            e.printStackTrace();
             return Optional.empty();
         }
 
