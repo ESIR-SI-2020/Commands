@@ -1,33 +1,22 @@
 package fr.esir.jxc.DTO;
 
+<<<<<<< HEAD
 import fr.esir.jxc.utils.CheckEmailFormat;
 import fr.esir.jxc.domain.models.Address;
+=======
+>>>>>>> User creation refinements according to PR comments. Updated dependency to Domain module.
 import lombok.Value;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
-import java.security.InvalidParameterException;
+import fr.esir.jxc.domain.models.Address;
 
+@Slf4j
 @Value
 public class UserCreationDTO {
 
-    public String email;
-    public String username;
-    public String password;
-    public Address address;
+    public final String email;
+    public final String username;
+    public final String password;
+    public final Address address;
 
-    private final static Logger logger = LoggerFactory.getLogger(UserCreationDTO.class);
-
-    public static void validateUserCreationRequest(UserCreationDTO user) {
-        if (StringUtils.isNotBlank(user.getUsername() )
-                || !CheckEmailFormat.isValid(user.getEmail())
-                || user.getPassword() == null
-                || user.getPassword().length() < 8
-        ) {
-            logger.warn("Invalid or missing mandatory argument.");
-
-            throw new InvalidParameterException();
-        }
-    }
 }

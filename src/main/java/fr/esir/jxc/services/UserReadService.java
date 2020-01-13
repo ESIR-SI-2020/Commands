@@ -1,9 +1,14 @@
 package fr.esir.jxc.services;
 
+<<<<<<< HEAD
 import fr.esir.jxc.domain.models.User;
+=======
+import java.util.Optional;
+
+>>>>>>> User creation refinements according to PR comments. Updated dependency to Domain module.
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import fr.esir.jxc.domain.models.User;
 
 @Service
 public class UserReadService {

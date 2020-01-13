@@ -1,36 +1,37 @@
 package fr.esir.jxc.controllers;
 
-import fr.esir.jxc.DTO.UserCreationDTO;
-import fr.esir.jxc.services.UserReadService;
-import fr.esir.jxc.services.UserWriteService;
+import java.security.InvalidParameterException;
+
+import fr.esir.jxc.services.UserCreationService;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.InvalidParameterException;
+import fr.esir.jxc.DTO.UserCreationDTO;
+import fr.esir.jxc.services.UserReadService;
+import fr.esir.jxc.services.UserWriteService;
 
-
-@RestController("/users")
+@Slf4j
 @AllArgsConstructor
+@RestController
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private final UserReadService userReadService;
     @Autowired
     private final UserWriteService userWriteService;
 
-    private final static Logger logger = LoggerFactory.getLogger(UserController.class);
-
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createUser(@RequestBody UserCreationDTO newUser) {
-        UserCreationDTO.validateUserCreationRequest(newUser);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void createUser(@RequestBody UserCreationDTO newUser) throws InvalidParameterException {
+        UserCreationService.validateUserCreationRequest(newUser);
 
         if (this.userReadService.findByUsername(newUser.getUsername()).isPresent()
                 || this.userReadService.findByEmail(newUser.getEmail()).isPresent()) {
-            logger.warn("User already existing for username {0} or email {1}.", newUser.getUsername(), newUser.getEmail());
+            log.warn("User already existing for username {0} or email {1}.", newUser.getUsername(), newUser.getEmail());
 
             throw new InvalidParameterException();
         }
