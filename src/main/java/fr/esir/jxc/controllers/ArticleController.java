@@ -2,15 +2,15 @@ package fr.esir.jxc.controllers;
 
 import fr.esir.jxc.services.ArticleCreationService;
 import fr.esir.jxc.services.ArticleReadService;
+import fr.esir.jxc.DTO.ArticleCreationDTO;
+import fr.esir.jxc.exceptions.ResourceException;
+import fr.esir.jxc.services.ArticleWriteService;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import fr.esir.jxc.DTO.ArticleCreationDTO;
-import fr.esir.jxc.exceptions.ResourceException;
-import fr.esir.jxc.services.ArticleWriteService;
 
 import java.security.InvalidParameterException;
 import java.util.concurrent.ExecutionException;
@@ -24,26 +24,23 @@ public class ArticleController {
     private ArticleWriteService articleWriteService;
     @Autowired
     private ArticleReadService articleReadService;
+
     /**
      * @param body the ArticleCreationDTO
      */
     @PostMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void createArticle(@RequestBody ArticleCreationDTO articleCreationDTO ){
-        ArticleCreationService.validateArticleCreationRequest(articleCreationDTO);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void createArticle(@RequestBody ArticleCreationDTO articleCreationRequest){
+        ArticleCreationService.validateArticleCreationRequest(articleCreationRequest);
 
-        if (this.articleReadService.findByUrl(articleCreationDTO.getUrl()).isPresent()) {
-            log.warn("Article already existing for url {0}.", articleCreationDTO.getUrl());
+        if (this.articleReadService.findByUrl(articleCreationRequest.getUrl()).isPresent()) {
+            log.warn("Article already existing for url {0}.", articleCreationRequest.getUrl());
             throw new ResourceException(HttpStatus.CONFLICT, "Found : The given article already exists");
         }
 
-        try {
-            articleWriteService.create(articleCreationDTO.getEmail(), articleCreationDTO.getUrl());
-        } catch (InterruptedException | ExecutionException e)  {
-            log.warn("Kafka service not responding.");
-            throw new ResourceException(HttpStatus.SERVICE_UNAVAILABLE, "Service unavailable : The event could not be sent");
-        }
+        articleWriteService.create(articleCreationRequest.getEmail(), articleCreationRequest.getUrl());
     }
+
     /**
      * @param articleId the id of the article
      */
@@ -55,11 +52,6 @@ public class ArticleController {
             throw new ResourceException(HttpStatus.NOT_FOUND, "Not found : The given article doesn't exists");
         }
 
-        try {
-            articleWriteService.delete(articleId);
-        } catch (InterruptedException | ExecutionException e)  {
-            log.warn("Kafka service not responding.");
-            throw new ResourceException(HttpStatus.SERVICE_UNAVAILABLE, "Service unavailable : The event could not be sent)");
-        }
+        articleWriteService.delete(articleId);
     }
 }

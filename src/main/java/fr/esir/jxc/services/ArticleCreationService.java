@@ -11,9 +11,9 @@ import org.springframework.http.HttpStatus;
 import java.security.InvalidParameterException;
 @Slf4j
 public class ArticleCreationService {
-    public static void validateArticleCreationRequest(ArticleCreationDTO articleCreationDTO) throws ResourceException {
-        String userEmail = articleCreationDTO.getEmail();
-        String articleUrl = articleCreationDTO.getUrl();
+    public static void validateArticleCreationRequest(ArticleCreationDTO articleCreationRequest) throws ResourceException {
+        String userEmail = articleCreationRequest.getEmail();
+        String articleUrl = articleCreationRequest.getUrl();
         if(userEmail == null || articleUrl == null || !EmailFormatChecker.isEmailValid(userEmail)) {
             log.warn("Invalid article creation request.");
             throw new ResourceException(HttpStatus.BAD_REQUEST, "Bad request : Given user email or article URL are empty or incorrect.");
