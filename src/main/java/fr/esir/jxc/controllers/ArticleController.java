@@ -17,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/articles")
 @Slf4j
 public class ArticleController {

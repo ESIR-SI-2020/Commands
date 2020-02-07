@@ -17,6 +17,7 @@ import fr.esir.jxc.services.UserCreationService;
 @Slf4j
 @AllArgsConstructor
 @RestController
+@CrossOrigin
 @RequestMapping("/users")
 public class UserController {
     @Autowired
