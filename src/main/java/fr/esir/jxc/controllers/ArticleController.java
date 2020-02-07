@@ -1,5 +1,6 @@
 package fr.esir.jxc.controllers;
 
+import fr.esir.jxc.error.ParameterError;
 import fr.esir.jxc.models.ShareArticleRequest;
 import fr.esir.jxc.services.ArticleService;
 import fr.esir.jxc.services.ShareArticleService;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.InvalidParameterException;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -27,15 +29,25 @@ public class ArticleController {
         if (!validOwnerEmail
             || !validTargetEmails
             || !userService.userExists(ownerEmail)
-            || !articleService.articleExists(articleId)
-            || !userService.userOwnsArticle(ownerEmail, articleId))
-        {
-            throw new InvalidParameterException();
+            || !userService.userOwnsArticle(ownerEmail, articleId)
+        ){
+            throw new InvalidParameterException("There was an error with the email provided");
+        }
+        if(!articleService.articleExists(articleId)) {
+            throw new InvalidParameterException("The article '" + articleId + "' does not exist");
         }
 
         // TODO
         // implement actual validation for request data (article & users must exist, article must be owned by sharing user)
 
         shareArticleService.shareArticle(articleId, ownerEmail, targetEmails);
+    }
+
+    @ExceptionHandler(InvalidParameterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ParameterError handleException(InvalidParameterException exception)
+    {
+        ParameterError errorObject = new ParameterError(LocalDateTime.now(),400, exception.getMessage());
+        return errorObject;
     }
 }
